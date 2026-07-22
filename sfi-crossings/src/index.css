@@ -1,15 +1,31 @@
-/* Tailwind CSS v4 — single import. */
+/* ============================================================
+   SFI CROSSINGS — application stylesheet
+
+   Token values are the ONYX & AMBER master, taken verbatim from
+   source/master/theme-onyx-amber.css (see its header for the
+   decision log). A wrong value is wrong in the master: fix it
+   there and re-sync — do not hand-edit values here.
+
+   DARK IS CANONICAL: the app shell sets class="dark" on <html>
+   (index.html). :root holds light, .dark overrides; there is no
+   .light class.
+
+   App-specific additions on top of the master are marked
+   [APP] with their reason. Faces load from ./fonts.css —
+   vendored woff2, regenerated per its header.
+   ============================================================ */
+@import "./fonts.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Base UI portal setup (base-ui.com/react/overview/quick-start):
-   #root gets its own stacking context so portalled popups (dialogs, menus,
-   selects — rendered into <body>, outside #root) always sit above app content
-   without z-index management. body position:relative is the documented fix for
-   backdrop coverage on iOS Safari 26+. */
+/* [APP] Base UI portal setup (base-ui.com quick start): #root gets its own
+   stacking context so portalled popups (dialogs, menus, selects — rendered
+   into <body>, outside #root) always sit above app content without z-index
+   management. body position:relative is the documented fix for backdrop
+   coverage on iOS Safari 26+. */
 #root {
   isolation: isolate;
 }
@@ -17,144 +33,272 @@ body {
   position: relative;
 }
 
-/* ==========================================================================
-   Design tokens — shadcn base-vega baseline + semantic intent tokens.
-   Light values under :root, dark values under .dark (see below); the
-   @theme inline block maps them to Tailwind utilities.
-   These are the stock base-vega values pending SFI Crossings design-system
-   integration (source/tokens.css) — replace values, keep the structure.
-   ========================================================================== */
-
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --success: oklch(0.627 0.194 149.214);
-  --warning: oklch(0.666 0.179 58.318);
-  --info: oklch(0.546 0.245 262.881);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* --- LIGHT (derived peer; docs-light-anchored where noted) --- */
+  --background: #ffffff;                  /* docs light canvas */
+  --foreground: #161616;                  /* docs light text */
+  --card: #ffffff;                        /* hierarchy via hairlines, per docs */
+  --card-foreground: #161616;
+  --popover: #ffffff;
+  --popover-foreground: #161616;
+  --primary: #ffc446;                     /* Resend amber (verbatim, D3) */
+  --primary-foreground: #201100;          /* deep amber-black [derived] */
+  --secondary: #eeeeee;                   /* light-gray-2 (verbatim) */
+  --secondary-foreground: #252525;        /* docs prose ladder */
+  --muted: #f0f0f0;                       /* light-gray-1 (verbatim) */
+  --muted-foreground: #676767;            /* docs #6f6f6f, nudged for 4.5:1 on muted */
+  --accent: #fff2da;                      /* amber-a3 over white [derived] */
+  --accent-foreground: #9d5f00;           /* text-grade amber, light [derived] */
+  --destructive: #d13438;                 /* red family, deepened for white fg [derived] */
+  --destructive-foreground: #ffffff;
+  --border: #dedede;                      /* docs hairline (verbatim) */
+  --input: #ababab;                       /* form boundary, strongest quiet neutral [derived] */
+  --ring: #a36b00;                        /* amber deepened to clear 3:1 on white [derived] */
+  --overlay: #0000004d;                   /* docs overlay oklab(0 0 0/.3) */
+  --chart-1: #3e5c76;                     /* cool palette per D6 (steel values) */
+  --chart-2: #2f7d87;
+  --chart-3: #6b5ca5;
+  --chart-4: #8a5a9e;                     /* plum — re-minted, D6 */
+  --chart-5: #7b8794;
+  --sidebar: #fafafa;                     /* docs sidebar */
+  --sidebar-foreground: #3e3e3e;
+  --sidebar-primary: #ffc446;
+  --sidebar-primary-foreground: #201100;
+  --sidebar-accent: #eeeeee;
+  --sidebar-accent-foreground: #161616;
+  --sidebar-border: #dedede;
+  --sidebar-ring: #a36b00;
+
+  /* status ladder (D4/D5; semantics assigned by DESIGN.md) */
+  --success: #17754a;                     /* deepened from #3dd68c anchor [derived] */
+  --success-foreground: #ffffff;
+  --warning: #ea7317;                     /* orange, away from amber primary (D4) */
+  --warning-foreground: #331200;
+  --info: #2668d9;                        /* blue-500 anchor, deepened [derived] */
+  --info-foreground: #ffffff;
+  --stale: #6f767c;                       /* gray-9 family — broken data trust */
+  --stale-foreground: #ffffff;
+
+  /* onyx-* extended set (Tier-4 theme extras; light counterparts [derived]) */
+  --onyx-button-invert-bg: #161616;       /* docs light CTA: black pill on white */
+  --onyx-button-invert-fg: #ffffff;
+  --onyx-button-invert-bg-hover: #000000;
+  --onyx-hairline-translucent: #0000001a;
+  --onyx-hairline-translucent-strong: #00000026;
+  --onyx-canvas-tint: #f7f7f8;
+  --onyx-terminal-green: #239d65;         /* code/deliverability glow (evidence) */
+
+  /* --- typography (mode-invariant) --- */
+  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", monospace;  /* verbatim — open font (D2) */
+  --font-serif: "Instrument Serif", "Source Serif 4", ui-serif, Georgia, serif;  /* Domaine sub (D2); display role only */
+  --font-weight-normal: 400;              /* Resend tops out at 600 — no 700 anywhere */
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 600;                /* alias to the heaviest observed weight */
+
+  /* app scale (evidence sizes; usage roles live in DESIGN.md prose) */
+  --onyx-font-size-micro: 0.75rem;        /* 12px — densest ×416 */
+  --onyx-font-size-small: 0.875rem;       /* 14px — default UI ×316 */
+  --onyx-font-size-regular: 1rem;         /* 16px */
+  --onyx-font-size-large: 1.25rem;        /* 20px — card titles */
+  --onyx-font-size-display: 3.5rem;       /* 56px — section display */
+  --onyx-font-size-hero: 6rem;            /* 96px — serif hero */
+  --onyx-display-tracking: -0.05em;       /* 56px at -2.8px */
+  --onyx-hero-tracking: -0.01em;          /* 96px at -0.96px */
+
+  /* --- shape & rhythm --- */
+  --radius: 0.625rem;                     /* 10px base; scale is multiplicative (D7, contract R5) */
+  --spacing: 0.25rem;
+  --onyx-radius-16: 16px;                 /* evidence: buttons/cards ×72 */
+  --onyx-radius-24: 24px;                 /* evidence: large cards ×10 */
+  --onyx-radius-pill: 9999px;             /* evidence: dominant control shape ×256 */
+  --ring-width: 2px;                      /* measured CTA ring */
+  --ring-offset: 2px;                     /* [derived] */
+
+  /* --- selection & inverse (identity moments) --- */
+  --selection-bg: #ffc446;                /* amber selection [derived — identity] */
+  --selection-foreground: #201100;
+  --inverse: #161616;                     /* high-contrast flipped surface (invert-button evidence) */
+  --inverse-foreground: #ffffff;
+  --border-strong: #8f8f8f;               /* meaning-bearing boundaries, ≥3:1 [derived] */
+
+  /* --- shadows (flat theme: subtle, transient layers only) --- */
+  --shadow-sm: 0 1px 2px #0000000f;       /* [derived — Resend is flat; contract requires depth for transient layers] */
+  --shadow-md: 0 4px 12px #00000014;
+  --shadow-lg: 0 8px 24px #0000001f;
+  --shadow-xs: var(--shadow-sm);
+  --shadow: var(--shadow-sm);
+  --shadow-xl: var(--shadow-lg);
+
+  /* --- motion (D7: measured) --- */
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 500ms;
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-emphasis: cubic-bezier(0.36, 0.66, 0.6, 1);
+}
+
+.dark {
+  /* --- DARK (canonical; extraction verbatim unless [derived]) --- */
+  --background: #000000;                  /* body, verbatim — true onyx */
+  --foreground: #f0f0f0;                  /* gray-12 */
+  --card: #141517;                        /* gray-1 / measured panel */
+  --card-foreground: #f0f0f0;
+  --popover: #191b1e;                     /* gray-2 */
+  --popover-foreground: #f0f0f0;
+  --primary: #ffc446;                     /* Resend amber (verbatim, D3) */
+  --primary-foreground: #201100;
+  --secondary: #212629;                   /* gray-3 */
+  --secondary-foreground: #f0f0f0;
+  --muted: #191b1e;                       /* gray-2 */
+  --muted-foreground: #a1a4a5;            /* gray-11 */
+  --accent: #201100;                      /* amber-a3 over black — warm hover wash */
+  --accent-foreground: #ffd88a;           /* [derived] */
+  --destructive: #f0565b;                 /* red family, lightened for dark fill [derived, D5] */
+  --destructive-foreground: #2b0607;
+  --border: #212629;                      /* measured card border */
+  --input: #434a4d;                       /* gray-7 [derived — strongest quiet boundary] */
+  --ring: #ffc446;                        /* = primary (steel/noir precedent) */
+  --overlay: #000000a6;                   /* [derived — dark scrims run deeper] */
+  --chart-1: #7da2c4;                     /* cool palette per D6 (steel dark values) */
+  --chart-2: #5cb0bc;
+  --chart-3: #a08fd6;
+  --chart-4: #b78ecc;                     /* plum — re-minted, D6 */
+  --chart-5: #93a1af;
+  --sidebar: #0c0d0e;                     /* = canvas-tint #14151799 over black (evidence) */
+  --sidebar-foreground: #c9cccd;          /* [derived] */
+  --sidebar-primary: #ffc446;
+  --sidebar-primary-foreground: #201100;
+  --sidebar-accent: #212629;              /* docs active-item pill */
+  --sidebar-accent-foreground: #f0f0f0;
+  --sidebar-border: #202225;              /* hairline composited on black */
+  --sidebar-ring: #ffc446;
+
+  /* status ladder (D4/D5) */
+  --success: #3dd68c;                     /* Resend green text value (verbatim anchor) */
+  --success-foreground: #0a2818;
+  --warning: #fb8b24;                     /* orange (D4) */
+  --warning-foreground: #331200;
+  --info: #66a8ff;                        /* blue-500 anchor, lightened [derived] */
+  --info-foreground: #0a1a33;
+  --stale: #878d8f;                       /* gray-10 — distinct from muted-fg gray-11 */
+  --stale-foreground: #17181a;
+
+  /* onyx-* extended set */
+  --onyx-button-invert-bg: #ffffff;       /* the white CTA pill */
+  --onyx-button-invert-fg: #000000;
+  --onyx-button-invert-bg-hover: #e5e5e6;
+  --onyx-hairline-translucent: color(display-p3 0.878 0.929 0.996 / 0.145);        /* verbatim */
+  --onyx-hairline-translucent-strong: color(display-p3 0.882 0.949 0.996 / 0.183); /* verbatim */
+  --onyx-canvas-tint: #14151799;          /* verbatim --canvas */
+  --onyx-terminal-green: color(display-p3 0.502 0.996 0.682 / 0.61);               /* verbatim */
+
+  --selection-bg: #ffc446;
+  --selection-foreground: #201100;
+  --inverse: #f0f0f0;
+  --inverse-foreground: #141517;
+  --border-strong: #393e42;               /* strong hairline composited on panel */
+
+  --shadow-sm: 0 1px 2px #00000059;       /* [derived] */
+  --shadow-md: 0 4px 16px #00000073;
+  --shadow-lg: 0 8px 32px #0000008c;
+  --shadow-xs: var(--shadow-sm);
+  --shadow: var(--shadow-sm);
+  --shadow-xl: var(--shadow-lg);
 }
 
 @theme inline {
-  --font-heading: var(--font-sans);
-  /* System stack pending the SFI Crossings brand faces (source/fonts.css) */
-  --font-sans: ui-sans-serif, system-ui, sans-serif;
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-info: var(--info);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-stale: var(--stale);
+  --color-stale-foreground: var(--stale-foreground);
+  --color-overlay: var(--overlay);
+  --color-inverse: var(--inverse);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-selection-bg: var(--selection-bg);
+  --color-selection-foreground: var(--selection-foreground);
+  --color-border-strong: var(--border-strong);
+
+  --spacing: var(--spacing);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+  /* [APP] font-heading is not a master token (the role→face map lives in
+     DESIGN.md prose: heading roles are realised in Inter, D2). The base-vega
+     vendor-zone components use the font-heading utility, so it must resolve —
+     mapped to the sans face. */
+  --font-heading: var(--font-sans);
+
+  /* multiplicative radius scale (contract R5, shadcn-current) */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
+  /* [APP] tail of the scale, same multiplicative derivation — the master stops
+     at xl, but vendor-zone components use rounded-4xl (badge); without these
+     the utilities would silently fall back to Tailwind defaults off-scale. */
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-}
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --success: oklch(0.792 0.209 151.711);
-  --warning: oklch(0.828 0.189 84.429);
-  --info: oklch(0.707 0.165 254.624);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border);
+    outline-color: color-mix(in oklab, var(--color-ring) 50%, transparent);
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--color-background);
+    color: var(--color-foreground);
   }
-  html {
-    @apply font-sans;
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-foreground);
   }
 }
