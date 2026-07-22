@@ -3,8 +3,14 @@
 The current working process. Nothing here is historical; if a rule is listed, it
 was verified. Extend the Components section as that work lands.
 
-**Staging area:** `DesignSpecs/` (local, authoritative)
-**Live design system:** `afeb4eb1-4960-4b12-b7b5-3c2015864745`
+**Staging area:** `design-specs/` (this repo, authoritative)
+**Live design system:** none — the temporary test projects were removed
+(July 2026); the next publish creates a fresh project and records its id here.
+**Evidence archives (read-only, not the live system):**
+`29637929-59b0-4b75-a1bb-3793cf6fc5ea` ("…Design System v2") — full component
+sync (21 components), `.dc.html` templates, foundations cards, and a
+`Session Findings.md` engineering note; `82d57e5a-f97e-4bac-9cf7-047392230499`
+("…component sync probe") — a minimal 5-component sync.
 
 ---
 
@@ -21,7 +27,7 @@ foundations/*.html           reference cards
 `README.md` is built, never hand-edited:
 
 ```bash
-cat README.preamble.md DESIGN.md > README.md
+cat master/README.preamble.md master/DESIGN.md > README.md
 ```
 
 `tokens.css` is generated from `theme-onyx-amber.css` (the master). A wrong value
@@ -60,12 +66,18 @@ Nothing compiles. The bytes on disk are the bytes in the project.
 | 3 | `DesignSync.write_files` | use `{path, localPath}` — bytes never enter context. Max 256/call, one `planId` covers repeats |
 | 4 | `DesignSync.list_files` / `get_file` | read back and verify |
 
-**Generated files — written by the Claude Design web app in the browser, not by
-you:** `_ds_manifest.json` (`"source":"spa"`), `_ds_bundle.js`,
-`_adherence.oxlintrc.json`. They share one etag; they appear on project open.
+**Generated files come from two different writers — do not conflate them:**
 
-`register_assets` returns `registered: N` but writes outside the manifest. It
-does not fix an unindexed project. Ignore it.
+- **SPA-written (the Claude Design web app, on project open):**
+  `_ds_manifest.json` (`"source":"spa"`) and `_adherence.oxlintrc.json`.
+- **Pipeline-written (the `/design-sync` component sync, §6):** `_ds_bundle.js`,
+  `_ds_bundle.css`, `_ds_sync.json`, `_preview/*.js`, `_vendor/react*.js`, and
+  the per-component `.jsx`/`.d.ts`/`.prompt.md` files. These are synced files;
+  never hand-edit them — fix the source repo and re-sync.
+
+`register_assets` is legacy: the pane builds its card index from each preview
+HTML's first-line `@dsCard` comment (compiled into `_ds_manifest.json` by the
+app's self-check). Only hand-authored projects without `@dsCard` markers need it.
 
 ---
 
@@ -105,8 +117,12 @@ it does, most of this constraint disappears.
 
 ## 5. Foundations cards
 
-Five, live: `colors`, `typography`, `shape-space-elevation`, `motion`,
-`status-glyphs`.
+Five, staged in `foundations/`: `colors`, `typography`, `shape-space-elevation`,
+`motion`, `status-glyphs` (plus the shared `card.css` chrome). Recovered from
+the v2 archive July 2026 with two doctrine corrections: the colors card's wash
+law now mixes with the surface it sits on, and the status-glyphs card defers to
+DESIGN.md §Iconography as the map's home (the card renders it, no longer owns
+it).
 
 **Rules:**
 
@@ -126,33 +142,64 @@ Five, live: `colors`, `typography`, `shape-space-elevation`, `motion`,
 
 ---
 
-## 6. Components — not yet built
+## 6. Components — synced by Anthropic's pipeline, not an ad-hoc build
 
-*Extend this section as the work lands.*
+**React components enter a design system through the `/design-sync` skill plus
+the `DesignSync` tool — a matched pair. The skill is user-invocation-only:
+Claude cannot launch it; the user types `/design-sync`.** Do not hand-roll a
+bundler; the pipeline owns the whole artifact set. (Verified against the v2 and
+probe archives, and the v2 `Session Findings.md` note, July 2026.)
 
-Two paths, verified:
+What the pipeline does, per sync:
 
-- **`.dc.html` Design Components** — no build. `<x-dc>` template with
-  `{{ dotted.holes }}`, `<sc-for>`/`<sc-if>`, and `class Component extends
-  DCLogic`. Runtime comes from `create_support_js` (server-written, once per
-  directory). Composed via `<dc-import name="Card">`. Editable in the Claude
-  Design editor.
-- **`_ds_bundle.js`** — an external npm build, uploaded whole. The `.jsx` files
-  in the project are re-export shims. You own that toolchain.
+- Takes a **local npm package** (the probe used `design-system-test@1.0.0`) and
+  pre-compiles it into `_ds_bundle.js` + `_ds_bundle.css`, assigning finished
+  component functions onto a `window.SFICrossings` global.
+- Generates, per component, `components/<group>/<Name>/`: a `.jsx` re-export
+  shim (`Object.assign(window, { Button: window.SFICrossings.Button })`), a
+  `.d.ts`, an `.html` preview card, and a `.prompt.md` consumer doc — plus
+  `_preview/<Name>.js` scripts and vendored React in `_vendor/`.
+- Tracks per-component source and render hashes in `_ds_sync.json` — sync is
+  **incremental, one component at a time, never a wholesale replace**.
+- Runs a render-check loop (`.render-check.json`) whose aggregate counts are
+  reported through `DesignSync.report_validate`
+  (total/bad/thin/variantsIdentical/iterations).
 
-Consumer sessions receive auto-generated binding boilerplate:
+How components run in Claude Design: **there is no build step in the host.**
+Pages are plain HTML; React 18 + Babel Standalone run at runtime; the
+pre-compiled bundle is loaded as a script and its components called directly.
 
-```html
-<link rel="stylesheet" href="_ds/<folder>/fonts.css">
-<link rel="stylesheet" href="_ds/<folder>/tokens.css">
-<script src="_ds/<folder>/_ds_bundle.js"></script>
-```
-> `const { Button, Card } = window.SFICrossings_<hash>;`
+**`.dc.html` Design Components** remain the second path — no build, `<x-dc>`
+template with `{{ dotted.holes }}`, `<sc-for>`/`<sc-if>`, `class Component
+extends DCLogic`, runtime from a per-directory `support.js`, composed via
+`<dc-import name="Card">`, editable in the Claude Design editor. Reusable
+prop-driven chunks (cards, tiles, rows) belong here; full screens leaning on
+sealed pickers do not (see below).
 
-**Sequence before writing any component:** build one real template first (the
-shipments list). Consumer sessions are told design-system templates *outrank*
-their own scaffolding, so a component encodes decisions rather than illustrating
-them — extract from what a template proved, don't invent ahead of it.
+### Verified failure modes (v2 session findings, 20 Jul 2026)
+
+- **React 18 preview vs React 19 components.** Components written ref-as-prop
+  (no `forwardRef`) silently drop refs under the preview's React 18. Inside a
+  DC — where each `x-import` mounts in its own React root — floating overlays
+  then measure a 0×0 anchor and snap to the origin. Plain HTML pages are fine.
+  - *Sealed* overlays (DatePicker, Combobox, Select — trigger owned internally):
+    unrescuable inside a DC. Keep them in plain pages.
+  - *Composable* overlays (Popover, Dropdown, Tooltip): rescuable — hand
+    `asChild` a native `<button className={buttonVariants({…})}>` trigger.
+  - Fix at source: `forwardRef` wrappers in the component repo before syncing.
+- **Compiled Tailwind internals** (`--tw-*`, `--ease-in-out`, …) in
+  `_ds_bundle.css` / `styles.css` trip the token-check warnings. Synced files
+  are read-only — resolve in the source repo, and keep compiled CSS unreachable
+  from `tokens.css` so it stays out of the token index.
+- **DCs embedded in plain pages via `<iframe>`** render fully, but the iframe
+  is a hard boundary: overlays cannot spill out, and embedded docs need `dark`
+  promoted onto their root on load.
+
+**Sequence before syncing any component:** build one real template first (the
+shipments list — v2 did exactly this in `templates/shipments/`). Consumer
+sessions are told design-system templates *outrank* their own scaffolding, so a
+component encodes decisions rather than illustrating them — extract from what a
+template proved, don't invent ahead of it.
 
 ---
 
