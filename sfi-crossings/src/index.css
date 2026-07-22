@@ -2,7 +2,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -66,7 +65,8 @@ body {
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: 'Inter Variable', sans-serif;
+  /* System stack pending the SFI Crossings brand faces (source/fonts.css) */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-info: var(--info);
