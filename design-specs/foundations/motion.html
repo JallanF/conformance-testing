@@ -1,0 +1,187 @@
+<!-- @dsCard group="Motion" name="Motion" subtitle="Durations, eases, staggered entrances — and the one-shot rule" width="1200" height="1100" -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Motion — SFI Crossings</title>
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="card.css" />
+    <style>
+      .stage {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .panel {
+        background: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 16px;
+      }
+
+      /* The visible end-state IS the base style. We animate FROM hidden, and only
+         where motion is welcome — so reduced motion, print and PDF all show the
+         content rather than a pre-animation opacity:0. */
+      @media (prefers-reduced-motion: no-preference) {
+        .stagger .panel {
+          animation: rise var(--motion-duration-base) var(--motion-ease-standard) both;
+        }
+        .stagger .panel:nth-child(1) { animation-delay: 0ms; }
+        .stagger .panel:nth-child(2) { animation-delay: 60ms; }
+        .stagger .panel:nth-child(3) { animation-delay: 120ms; }
+        .stagger .panel:nth-child(4) { animation-delay: 180ms; }
+      }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: none; }
+      }
+
+      .skeleton {
+        height: 14px;
+        border-radius: 3px;
+        background: var(--secondary);
+        margin-bottom: 10px;
+      }
+      .skeleton:last-child { width: 60%; margin-bottom: 0; }
+
+      .ease-demo { display: flex; gap: 16px; flex-wrap: wrap; }
+      .ease-tile { flex: 1 1 260px; }
+      .ease-curve {
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+        transform-origin: left center;
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .ease-fast     { animation: sweep var(--motion-duration-fast) var(--motion-ease-standard) both; }
+        .ease-base     { animation: sweep var(--motion-duration-base) var(--motion-ease-standard) both; }
+        .ease-slow     { animation: sweep var(--motion-duration-slow) var(--motion-ease-emphasis) both; }
+      }
+      @keyframes sweep {
+        from { transform: scaleX(0); }
+        to   { transform: scaleX(1); }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Motion</h1>
+    <p class="lede">
+      This product moves — deliberately. Energy lives in staging and transitions,
+      never in decoration. Every cue is one-shot.
+    </p>
+
+    <section>
+      <p class="eyebrow">The scale</p>
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Value</th><th>Used for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--motion-duration-fast</code></td>
+            <td class="num">150ms</td>
+            <td class="meta">Hover, focus, small state flips.</td>
+          </tr>
+          <tr>
+            <td><code>--motion-duration-base</code></td>
+            <td class="num">200ms</td>
+            <td class="meta">Panel entrances, expansions, the default.</td>
+          </tr>
+          <tr>
+            <td><code>--motion-duration-slow</code></td>
+            <td class="num">500ms</td>
+            <td class="meta">Large context-preserving moves; the one beat of ceremony.</td>
+          </tr>
+          <tr>
+            <td><code>--motion-ease-standard</code></td>
+            <td><code>cubic-bezier(.4, 0, .2, 1)</code></td>
+            <td class="meta">Almost everything.</td>
+          </tr>
+          <tr>
+            <td><code>--motion-ease-exit</code></td>
+            <td><code>cubic-bezier(.4, 0, 1, 1)</code></td>
+            <td class="meta">Things leaving.</td>
+          </tr>
+          <tr>
+            <td><code>--motion-ease-emphasis</code></td>
+            <td><code>cubic-bezier(.36, .66, .6, 1)</code></td>
+            <td class="meta">Large moves that deserve to be felt.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="ease-demo" style="margin-top: 24px">
+        <div class="ease-tile">
+          <p class="meta" style="margin-bottom: 8px">fast · standard</p>
+          <div class="ease-curve ease-fast"></div>
+        </div>
+        <div class="ease-tile">
+          <p class="meta" style="margin-bottom: 8px">base · standard</p>
+          <div class="ease-curve ease-base"></div>
+        </div>
+        <div class="ease-tile">
+          <p class="meta" style="margin-bottom: 8px">slow · emphasis</p>
+          <div class="ease-curve ease-slow"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Staggered entrance — reload to replay</p>
+      <div class="stage stagger">
+        <div class="panel">Quote summary</div>
+        <div class="panel">Route &amp; schedule</div>
+        <div class="panel">Customs documents</div>
+        <div class="panel">Charges</div>
+      </div>
+      <p class="note" style="margin-top: 16px">
+        Panels arrive in sequence — a short offset per panel, not a long one. The
+        end-state is the base style and the animation runs <em>from</em> hidden, so
+        under reduced motion (and in print, and in a PDF export) the content is
+        simply there. Every cue has a static equivalent.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Loading — confident and calm</p>
+      <div class="stage">
+        <div class="panel">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top: 16px">
+        Skeletons for the first paint of panels and lists, steady spinners for
+        in-flight actions, determinate progress for uploads. <strong>Nothing
+        bounces.</strong> Note the skeleton above does not shimmer — a looping
+        shimmer would violate the one-shot rule.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">The rules</p>
+      <p class="law">
+        <strong>Every cue is one-shot.</strong> Never blinking, pulsing, or looping
+        an attention animation. Nothing animates continuously inside a table or at
+        rest.
+        <br /><br />
+        Transitions <strong>preserve context</strong>: expansions unfold, views
+        slide rather than cut. A confirmed-good transition earns
+        <strong>one beat of ceremony</strong> — then the interface returns to calm.
+        <br /><br />
+        There is no real-time push in v1: data arrives by fetch. When a refetch
+        visibly changes a value on screen, it may take a brief one-shot highlight
+        that settles back to its resting state.
+        <br /><br />
+        <strong>Reduced motion is honoured with a static equivalent for every
+        cue</strong> — including the ceremony.
+      </p>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,207 @@
+<!-- @dsCard group="Colors" name="Colour & the status ladder" subtitle="Surfaces, the amber rule, five status roles, chart series" width="1200" height="1500" -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Colour &amp; the status ladder — SFI Crossings</title>
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="card.css" />
+  </head>
+  <body>
+    <h1>Colour</h1>
+    <p class="lede">
+      Dark is canonical and the default; light is a first-class peer. Colour is
+      punctuation — spent on action and status, never on wallpaper.
+    </p>
+
+    <section>
+      <p class="eyebrow">The one rule</p>
+      <p class="law">
+        <strong>Amber is punctuation, never wallpaper.</strong> It appears in
+        exactly four places: the one <code>primary</code> action per view, the
+        focus <code>ring</code>, text selection, and the quiet <code>accent</code>
+        hover wash. It is never a large surface tint, never a border colour, and
+        never decoration. Secondary emphasis uses the <code>inverse</code> pill —
+        never a second amber.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Surfaces — depth is tint, not shadow</p>
+      <div class="grid">
+        <div class="tile">
+          <div class="swatch" style="background: var(--background)"></div>
+          <span class="name">--background</span>
+          <span class="meta">The canvas. Everything sits on it.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--card)"></div>
+          <span class="name">--card</span>
+          <span class="meta">Panels. Lifted above the canvas by tone alone.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--popover)"></div>
+          <span class="name">--popover</span>
+          <span class="meta">Transient layers — menus, dialogs.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--border)"></div>
+          <span class="name">--border</span>
+          <span class="meta">The hairline. Separation without boxes.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--border-strong)"></div>
+          <span class="name">--border-strong</span>
+          <span class="meta">Hover, and meaning-bearing boundaries.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--muted)"></div>
+          <span class="name">--muted</span>
+          <span class="meta">Recessed fills.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">The amber, and its one companion</p>
+      <div class="grid">
+        <div class="tile">
+          <div class="swatch" style="background: var(--primary)"></div>
+          <span class="name">--primary</span>
+          <span class="meta">The one action per view. The focus ring. Selection.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--accent)"></div>
+          <span class="name">--accent</span>
+          <span class="meta">The quiet hover wash. The only amber that touches a surface.</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--inverse)"></div>
+          <span class="name">--inverse</span>
+          <span class="meta">Secondary emphasis. Never a second amber.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">The status ladder — five roles</p>
+
+      <div class="status-row">
+        <span class="status-chip" style="background: var(--success); color: var(--success-foreground)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          Delivered
+        </span>
+        <div class="status-def">
+          <strong>success</strong> — confirmed-good <em>transitions</em>.
+          <p>Quote accepted, booking confirmed, customs released, delivered, payment settled. An in-transit shipment running on schedule is <strong>not</strong> green — resting-normal stays neutral.</p>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="status-chip" style="background: var(--info); color: var(--info-foreground)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          ETA revised
+        </span>
+        <div class="status-def">
+          <strong>info</strong> — noteworthy, but normal.
+          <p>An ETA revision needing no action, a document ready to download, a rate-change notice.</p>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="status-chip" style="background: var(--warning); color: var(--warning-foreground)">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+            <path d="M12 9v4" stroke="var(--warning)"></path>
+            <path d="M12 17h.01" stroke="var(--warning)"></path>
+          </svg>
+          Documents due
+        </span>
+        <div class="status-def">
+          <strong>warning</strong> — needs attention soon.
+          <p>A quote nearing expiry, documents missing before pickup, payment coming due, customs requesting paperwork. Shown filled — the colour-independent weight channel.</p>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="status-chip" style="background: var(--destructive); color: var(--destructive-foreground)">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z"></path>
+            <path d="M12 8v4" stroke="var(--destructive)"></path>
+            <path d="M12 16h.01" stroke="var(--destructive)"></path>
+          </svg>
+          Customs hold
+        </span>
+        <div class="status-def">
+          <strong>destructive</strong> — blocking or critical, and destructive actions themselves.
+          <p>Customs hold, payment failed, booking rejected; cancel, delete. Shown filled. A critical alert never lives in a disappearing toast.</p>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <span class="status-chip" style="background: var(--stale); color: var(--stale-foreground)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 6v6l4 2"></path>
+            <path d="M20 12v5"></path>
+            <path d="M20 21h.01"></path>
+            <path d="M21.25 8.2A10 10 0 1 0 16 21.16"></path>
+          </svg>
+          Tracking stale
+        </span>
+        <div class="status-def">
+          <strong>stale</strong> — broken data trust.
+          <p>A tracking feed lost, or aged past its freshness threshold. <strong>Stale composes:</strong> stale-and-was-warning shows stale. Stale data is never presented as current.</p>
+        </div>
+      </div>
+
+      <p class="law" style="margin-top: 24px">
+        <strong>Never colour alone.</strong> Every status above carries its glyph
+        <em>and</em> its label — that pairing is how status is read, not a
+        fallback for people who cannot see the colour. Soft status washes are
+        derived at point of use from the role colour and the surface the wash
+        sits on — <code>--card</code> on a panel, <code>--background</code> only
+        on the canvas; status tints are never minted as new values.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Chart series — categorical only</p>
+      <div class="grid">
+        <div class="tile">
+          <div class="swatch" style="background: var(--chart-1)"></div>
+          <span class="name">--chart-1</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--chart-2)"></div>
+          <span class="name">--chart-2</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--chart-3)"></div>
+          <span class="name">--chart-3</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--chart-4)"></div>
+          <span class="name">--chart-4</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--chart-5)"></div>
+          <span class="name">--chart-5</span>
+        </div>
+      </div>
+      <p class="note" style="margin-top: 16px">
+        The series palette excludes every status hue and the amber primary
+        <em>by construction</em>: in a chart, a warm colour can only ever mean
+        status or action — never a series. Magnitude uses a neutral sequential
+        treatment; its tokenisation is an open decision.
+      </p>
+    </section>
+  </body>
+</html>

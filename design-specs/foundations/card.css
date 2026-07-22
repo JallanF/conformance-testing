@@ -1,0 +1,155 @@
+/* =============================================================================
+   Card chrome — the furniture of the foundation cards themselves.
+
+   This is DOCUMENTATION layout, not product design: the grid a card lays its
+   specimens out on, the caption under a swatch. It is built entirely from the
+   tokens so the reference cannot drift from the thing it documents — there is
+   not one hard-coded colour or size below.
+
+   Product component styles do NOT belong here. When components arrive, each one
+   owns its own file.
+   ========================================================================== */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--onyx-font-size-small);
+  line-height: 1.5;
+  margin: 0;
+  padding: calc(var(--spacing) * 12);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The mono eyebrow — label-caps role. Used as each section's header. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--onyx-font-size-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted-foreground);
+  margin: 0 0 calc(var(--spacing) * 4);
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--onyx-font-size-display);
+  letter-spacing: var(--onyx-display-tracking);
+  line-height: 1.05;
+  margin: 0 0 calc(var(--spacing) * 3);
+}
+
+.lede {
+  color: var(--muted-foreground);
+  max-width: 62ch;
+  margin: 0 0 calc(var(--spacing) * 12);
+  text-wrap: pretty;
+}
+
+section { margin-bottom: calc(var(--spacing) * 14); }
+
+.note {
+  color: var(--muted-foreground);
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+/* A rule that says "this is the law", not just a note. */
+.law {
+  border-left: 2px solid var(--primary);
+  padding-left: calc(var(--spacing) * 4);
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+.grid {
+  display: grid;
+  gap: calc(var(--spacing) * 4);
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+/* A specimen tile: the panel surface, lifted by tint and hairline — never by a
+   resting shadow (DESIGN.md / Elevation & Depth). */
+.tile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--spacing) * 4);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+}
+
+.swatch {
+  height: 56px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.name {
+  font-family: var(--font-mono);
+  font-size: var(--onyx-font-size-micro);
+}
+
+.meta {
+  color: var(--muted-foreground);
+  font-size: var(--onyx-font-size-micro);
+  text-wrap: pretty;
+}
+
+/* Status rows: swatch + glyph + label together, because a status is never
+   allowed to be colour alone (DESIGN.md / Colors).
+   A fixed chip column, so the five definitions align into a readable column —
+   chips sized to their own content left the ladder ragged. */
+.status-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  align-items: center;
+  gap: calc(var(--spacing) * 5);
+  padding: calc(var(--spacing) * 3) 0;
+  border-bottom: 1px solid var(--border);
+}
+.status-row:last-child { border-bottom: 0; }
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 2);
+  border-radius: var(--onyx-radius-pill);   /* chips share the action silhouette */
+  padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  justify-self: start;
+}
+
+.status-chip svg { width: 16px; height: 16px; flex: none; }
+
+.status-def { flex: 1; min-width: 0; }
+.status-def strong { font-weight: var(--font-weight-semibold); }
+.status-def p { margin: calc(var(--spacing) * 1) 0 0; color: var(--muted-foreground); }
+
+table { border-collapse: collapse; width: 100%; }
+th, td {
+  text-align: left;
+  padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4) calc(var(--spacing) * 3) 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+th {
+  font-family: var(--font-mono);
+  font-size: var(--onyx-font-size-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted-foreground);
+  font-weight: var(--font-weight-normal);
+}
+td code {
+  font-family: var(--font-mono);
+  font-size: var(--onyx-font-size-micro);
+}
+
+/* Numeric columns: mono, tabular, right-aligned (DESIGN.md / Typography). */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}

@@ -1,0 +1,169 @@
+<!-- @dsCard group="Icons" name="Status glyphs" subtitle="The fixed one-to-one role→glyph map — ratified, canonical" width="1200" height="900" -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Status glyphs — SFI Crossings</title>
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="card.css" />
+    <style>
+      .glyph-cell { display: flex; align-items: center; gap: 12px; }
+      .glyph-cell svg { width: 22px; height: 22px; flex: none; }
+      .ratified {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 16px 20px;
+        max-width: 72ch;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 40px;
+      }
+      .ratified svg { width: 20px; height: 20px; flex: none; color: var(--success); margin-top: 2px; }
+      .ratified p { margin: 0; text-wrap: pretty; }
+    </style>
+  </head>
+  <body>
+    <h1>Status glyphs</h1>
+    <p class="lede">
+      Each of the five status roles has exactly one canonical glyph, used
+      everywhere. The glyph is what lets status survive without colour.
+    </p>
+
+    <div class="ratified">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="m9 12 2 2 4-4"></path>
+      </svg>
+      <p>
+        <strong>Ratified 2026-07-14 by the design authority.</strong> The map is
+        fixed in DESIGN.md §Iconography — canonical, one-to-one, and not open for
+        reinterpretation; this card renders it. Every status anywhere in the
+        product uses the glyph below for its role — there is no second mapping, and
+        a design that invents one is a defect.
+      </p>
+    </div>
+
+    <section>
+      <p class="eyebrow">The mapping</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Outline — the default</th>
+            <th>Filled</th>
+            <th>Lucide name</th>
+            <th>Why this glyph</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>success</code></td>
+            <td>
+              <span class="glyph-cell" style="color: var(--success)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </span>
+            </td>
+            <td class="meta">—</td>
+            <td><code>circle-check</code></td>
+            <td class="meta">A completed transition. The check is unambiguous and reads at 16px.</td>
+          </tr>
+          <tr>
+            <td><code>info</code></td>
+            <td>
+              <span class="glyph-cell" style="color: var(--info)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 16v-4"></path>
+                  <path d="M12 8h.01"></path>
+                </svg>
+              </span>
+            </td>
+            <td class="meta">—</td>
+            <td><code>info</code></td>
+            <td class="meta">Noteworthy, not urgent. Shares the circle silhouette with success — both are calm states.</td>
+          </tr>
+          <tr>
+            <td><code>warning</code></td>
+            <td>
+              <span class="glyph-cell" style="color: var(--warning)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+                  <path d="M12 9v4"></path>
+                  <path d="M12 17h.01"></path>
+                </svg>
+              </span>
+            </td>
+            <td>
+              <span class="glyph-cell" style="color: var(--warning)">
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path>
+                  <path d="M12 9v4" stroke="var(--background)"></path>
+                  <path d="M12 17h.01" stroke="var(--background)"></path>
+                </svg>
+              </span>
+            </td>
+            <td><code>triangle-alert</code></td>
+            <td class="meta">The triangle breaks the circle silhouette — shape alone now separates "attend to this" from "noted".</td>
+          </tr>
+          <tr>
+            <td><code>destructive</code></td>
+            <td>
+              <span class="glyph-cell" style="color: var(--destructive)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 16h.01"></path>
+                  <path d="M12 8v4"></path>
+                  <path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z"></path>
+                </svg>
+              </span>
+            </td>
+            <td>
+              <span class="glyph-cell" style="color: var(--destructive)">
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z"></path>
+                  <path d="M12 8v4" stroke="var(--background)"></path>
+                  <path d="M12 16h.01" stroke="var(--background)"></path>
+                </svg>
+              </span>
+            </td>
+            <td><code>octagon-alert</code></td>
+            <td class="meta">The stop-sign octagon. Blocking, and distinct in shape from the warning triangle.</td>
+          </tr>
+          <tr>
+            <td><code>stale</code></td>
+            <td>
+              <span class="glyph-cell" style="color: var(--stale)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 6v6l4 2"></path>
+                  <path d="M20 12v5"></path>
+                  <path d="M20 21h.01"></path>
+                  <path d="M21.25 8.2A10 10 0 1 0 16 21.16"></path>
+                </svg>
+              </span>
+            </td>
+            <td class="meta">—</td>
+            <td><code>clock-alert</code></td>
+            <td class="meta">Stale is about <em>age</em>, not failure. The clock says the data is old; the alert mark says that is a problem.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <p class="eyebrow">Rules</p>
+      <p class="law">
+        <strong>Outline is the default.</strong> Filled variants are reserved for
+        <code>warning</code> and <code>destructive</code> — they are the
+        colour-independent weight channel, which is what makes the two most urgent
+        rungs legible without hue. A status icon is <strong>always</strong> paired
+        with a text label. One family (Lucide), one stroke weight, sizes from the
+        type scale. Icons carry meaning or are omitted — there are no decorative
+        icons in this product.
+      </p>
+    </section>
+  </body>
+</html>

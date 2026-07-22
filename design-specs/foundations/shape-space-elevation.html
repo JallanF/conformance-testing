@@ -1,0 +1,155 @@
+<!-- @dsCard group="Spacing" name="Shape, space & elevation" subtitle="Pills vs near-square, the spacing unit, and why panels have no shadow" width="1200" height="1200" -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shape, space &amp; elevation — SFI Crossings</title>
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="card.css" />
+    <style>
+      .shape-demo { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+      .pill {
+        border-radius: var(--onyx-radius-pill);
+        padding: 10px 20px;
+        font-weight: var(--font-weight-medium);
+        border: 1px solid transparent;
+        min-height: 24px;
+      }
+      .pill-primary { background: var(--primary); color: var(--primary-foreground); }
+      .pill-inverse { background: var(--inverse); color: var(--inverse-foreground); }
+      .pill-ghost { background: transparent; color: var(--foreground); border-color: var(--border); }
+      .square-input {
+        border-radius: var(--radius-md);
+        border: 1px solid var(--input);
+        background: var(--card);
+        color: var(--foreground);
+        padding: 10px 14px;
+        font-family: var(--font-sans);
+        font-size: var(--onyx-font-size-small);
+        min-width: 240px;
+      }
+      .layer {
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        padding: 20px;
+      }
+      .layer-popover { box-shadow: var(--shadow-lg); }
+      .space-bar { background: var(--primary); height: 12px; border-radius: 2px; }
+      .space-row { display: flex; align-items: center; gap: 16px; padding: 6px 0; }
+      .space-label { font-family: var(--font-mono); font-size: var(--onyx-font-size-micro); color: var(--muted-foreground); min-width: 120px; }
+    </style>
+  </head>
+  <body>
+    <h1>Shape &amp; space</h1>
+    <p class="lede">
+      Space is this product's confidence. Content is staged like a product page,
+      never crammed like a terminal — and depth comes from tone, not shadow.
+    </p>
+
+    <section>
+      <p class="eyebrow">One silhouette per control class</p>
+      <div class="shape-demo">
+        <button class="pill pill-primary">Book shipment</button>
+        <button class="pill pill-inverse">Save draft</button>
+        <button class="pill pill-ghost">Cancel</button>
+        <input class="square-input" type="text" value="Toronto, ON" aria-label="Origin" />
+      </div>
+      <p class="law" style="margin-top: 20px">
+        <strong>Actions are pills</strong> — the signature control silhouette;
+        chips and badges share it. <strong>Inputs, panels and dialogs are
+        near-square</strong> on the radius scale. Never mix silhouettes within a
+        class. Note the emphasis budget above: <em>one</em> amber action. The
+        secondary is the <code>inverse</code> pill — never a second amber.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Radius scale</p>
+      <div class="grid">
+        <div class="tile">
+          <div class="swatch" style="background: var(--muted); border-radius: var(--radius-sm)"></div>
+          <span class="name">--radius-sm</span>
+          <span class="meta">6px — chips, small inputs</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--muted); border-radius: var(--radius-md)"></div>
+          <span class="name">--radius-md</span>
+          <span class="meta">8px — inputs</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--muted); border-radius: var(--radius-lg)"></div>
+          <span class="name">--radius-lg</span>
+          <span class="meta">10px — panels, the base</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--muted); border-radius: var(--radius-xl)"></div>
+          <span class="name">--radius-xl</span>
+          <span class="meta">14px — dialogs, large cards</span>
+        </div>
+        <div class="tile">
+          <div class="swatch" style="background: var(--muted); border-radius: var(--onyx-radius-pill)"></div>
+          <span class="name">--onyx-radius-pill</span>
+          <span class="meta">Actions, chips, badges</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Spacing — the rhythm unit</p>
+      <div class="space-row">
+        <span class="space-label">spacing × 1</span>
+        <div class="space-bar" style="width: calc(var(--spacing) * 1)"></div>
+      </div>
+      <div class="space-row">
+        <span class="space-label">spacing × 2</span>
+        <div class="space-bar" style="width: calc(var(--spacing) * 2)"></div>
+      </div>
+      <div class="space-row">
+        <span class="space-label">spacing × 4</span>
+        <div class="space-bar" style="width: calc(var(--spacing) * 4)"></div>
+      </div>
+      <div class="space-row">
+        <span class="space-label">spacing × 8</span>
+        <div class="space-bar" style="width: calc(var(--spacing) * 8)"></div>
+      </div>
+      <div class="space-row">
+        <span class="space-label">spacing × 12</span>
+        <div class="space-bar" style="width: calc(var(--spacing) * 12)"></div>
+      </div>
+      <div class="space-row">
+        <span class="space-label">spacing × 16</span>
+        <div class="space-bar" style="width: calc(var(--spacing) * 16)"></div>
+      </div>
+      <p class="note" style="margin-top: 16px">
+        Sections stack in a deliberate vertical rhythm on this unit. Density is
+        <strong>never</strong> user-switchable and never differs per view. Forms
+        and reading views hold a constrained measure; data views use the full
+        content width. Interactive targets never fall below 24px.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Elevation — tint, then hairline. Shadow only when floating.</p>
+      <div style="background: var(--background); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border)">
+        <p class="meta" style="margin: 0 0 16px">--background — the canvas</p>
+        <div class="layer" style="background: var(--card)">
+          <p class="meta" style="margin: 0 0 16px">--card — a resting panel. Lifted by tone and a hairline. <strong>No shadow.</strong></p>
+          <div class="layer layer-popover" style="background: var(--popover)">
+            <p class="meta" style="margin: 0">--popover — a transient floating layer. <strong>This</strong> is what a shadow is for.</p>
+          </div>
+        </div>
+      </div>
+      <p class="law" style="margin-top: 20px">
+        <strong>Never give a resting panel a shadow.</strong> Depth is tint
+        layering — <code>background</code> beneath <code>card</code> beneath
+        <code>popover</code> — plus hairline separation. A hover may strengthen a
+        hairline to <code>border-strong</code>; it never adds a shadow.
+        <code>shadow-sm/md/lg</code> belong to transient layers only — menus,
+        popovers, dialogs — over the <code>overlay</code> scrim. And glow is not
+        elevation: it is a rare celebration accent on a confirmed transition,
+        never ambient.
+      </p>
+    </section>
+  </body>
+</html>

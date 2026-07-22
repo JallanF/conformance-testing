@@ -1,0 +1,179 @@
+<!-- @dsCard group="Type" name="Typography" subtitle="Five roles, three faces, and the money/ID/timestamp rules" width="1200" height="1400" -->
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Typography — SFI Crossings</title>
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="card.css" />
+    <style>
+      .specimen { border-bottom: 1px solid var(--border); padding: 24px 0; }
+      .specimen:last-child { border-bottom: 0; }
+      .specimen .role {
+        font-family: var(--font-mono);
+        font-size: var(--onyx-font-size-micro);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted-foreground);
+        margin-bottom: 12px;
+      }
+      .sample-display {
+        font-family: var(--font-serif);
+        font-weight: var(--font-weight-normal);
+        font-size: var(--onyx-font-size-display);
+        letter-spacing: var(--onyx-display-tracking);
+        line-height: 1.05;
+      }
+      .sample-heading {
+        font-family: var(--font-sans);
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--onyx-font-size-large);
+      }
+      .sample-body { font-family: var(--font-sans); font-size: var(--onyx-font-size-regular); }
+      .sample-caption { font-family: var(--font-sans); font-size: var(--onyx-font-size-micro); color: var(--muted-foreground); }
+      .sample-caps {
+        font-family: var(--font-mono);
+        font-size: var(--onyx-font-size-micro);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Typography</h1>
+    <p class="lede">
+      Type does the talking. A display serif that appears rarely and lands hard,
+      mono eyebrows that give panels a machined precision, and a quiet sans
+      carrying everything else.
+    </p>
+
+    <section>
+      <p class="eyebrow">The three faces</p>
+      <div class="grid">
+        <div class="tile">
+          <span class="name">--font-sans</span>
+          <span class="meta">Inter. Everything that is not display, and not a number in a column.</span>
+        </div>
+        <div class="tile">
+          <span class="name">--font-mono</span>
+          <span class="meta">Commit Mono. Eyebrows, IDs, money, timestamps.</span>
+        </div>
+        <div class="tile">
+          <span class="name">--font-serif</span>
+          <span class="meta">Instrument Serif. The display voice — and nothing else.</span>
+        </div>
+      </div>
+      <p class="note" style="margin-top: 16px">
+        Inter is deliberate and mandated. It is not a placeholder to be upgraded
+        to something more distinctive.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">The five roles</p>
+
+      <div class="specimen">
+        <p class="role">display — serif, regular, tight tracking</p>
+        <div class="sample-display">Quote QT-4471 accepted</div>
+        <p class="meta" style="margin-top: 12px">
+          Page heroes, empty states, milestone moments. <strong>Never data, tables, or controls.</strong>
+          If it appears more than once or twice on a screen, it is wrong.
+        </p>
+      </div>
+
+      <div class="specimen">
+        <p class="role">heading — sans, semibold, large step</p>
+        <div class="sample-heading">Shipment details</div>
+        <p class="meta" style="margin-top: 12px">Section and panel headings.</p>
+      </div>
+
+      <div class="specimen">
+        <p class="role">body — sans, regular step (forms and reading) / small step (dense views)</p>
+        <div class="sample-body">
+          Customs released this shipment at 09:14 EST. No further documents are required.
+        </div>
+        <p class="meta" style="margin-top: 12px">
+          Plain, confident, concrete. Every message says what happened and what to do next.
+        </p>
+      </div>
+
+      <div class="specimen">
+        <p class="role">caption / label — sans, micro step</p>
+        <div class="sample-caption">Last updated 2 minutes ago</div>
+        <p class="meta" style="margin-top: 12px">
+          Secondary metadata. Nothing renders below the micro step (12px).
+        </p>
+      </div>
+
+      <div class="specimen">
+        <p class="role">label-caps — mono, micro step, all-caps, wide tracking</p>
+        <div class="sample-caps">Consignee</div>
+        <p class="meta" style="margin-top: 12px">
+          Section eyebrows, panel headers, IDs. <strong>ALL-CAPS belongs to this role and no other.</strong>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">Numbers in columns — mono, tabular, right-aligned</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Shipment</th>
+            <th>Route</th>
+            <th style="text-align: right">Weight</th>
+            <th style="text-align: right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>SFI-2026-0041</code></td>
+            <td>Toronto → Detroit</td>
+            <td class="num">1,240 kg</td>
+            <td class="num">$4,120.00</td>
+          </tr>
+          <tr>
+            <td><code>SFI-2026-0042</code></td>
+            <td>Montréal → Albany</td>
+            <td class="num">880 kg</td>
+            <td class="num">$1,995.50</td>
+          </tr>
+          <tr>
+            <td><code>SFI-2026-0043</code></td>
+            <td>Vancouver → Seattle</td>
+            <td class="num">12,600 kg</td>
+            <td class="num">$18,340.75</td>
+          </tr>
+          <tr>
+            <td><code>SFI-2026-0044</code></td>
+            <td>Calgary → Great Falls</td>
+            <td class="num">305 kg</td>
+            <td class="num">−$212.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top: 16px">
+        Tabular figures make the decimal points line up — that is the whole point,
+        and it is why a proportional face is wrong here. Note the last row: a
+        <strong>minus sign</strong> for negatives, never accounting parentheses.
+      </p>
+    </section>
+
+    <section>
+      <p class="eyebrow">Money, IDs, timestamps</p>
+      <p class="law">
+        <strong>Money:</strong> one currency at a time — the shipment's own, never
+        dual CAD/USD. Two decimals, locale thousands separators, minus sign for
+        negatives. <strong>Never abbreviate a money value</strong> (chart axes may).
+        <br /><br />
+        <strong>Timestamps:</strong> relative by default ("2 h ago"). Absolute
+        timestamps <strong>with an explicit timezone</strong> in detail metadata and
+        on legal surfaces — invoices, customs documents. A cross-border document
+        never shows a bare time.
+        <br /><br />
+        <strong>No italics</strong> in UI text. Underline is reserved for links.
+      </p>
+    </section>
+  </body>
+</html>
