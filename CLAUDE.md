@@ -19,6 +19,8 @@ worked on here.
 
 - `source/` — SFI Crossings design system source (playbook, master theme,
   shipped artifacts). See `source/DESIGN-SYSTEM-PLAYBOOK.md`.
-- `react-app/` — the working application (Vite + React). This is where changes
-  happen.
+- `sfi-crossings/` — the working application (Vite + React + TypeScript).
+  This is where changes happen. It follows the ref arch's conventions:
+  page-first structure, vendor zone in `src/components/ui/`, `@` alias,
+  suffix-based naming.
 - `freight-ref-arch-v11/` — read-only reference architecture (see above).
