@@ -104,18 +104,21 @@ CSS, so nothing is off-limits.
 
 ## 3. What is in this project, and what is not yet
 
-This is the design system at its core: the authority document and the values. That
-is enough to design against — and it is deliberately all that exists right now.
+This is the design system's core: the authority document, the values, and the
+foundations that render them.
 
 - `README.md` — this file. The authority.
 - `tokens.css` — every visual value; imports the faces.
 - `fonts.css` + `fonts/` — the three brand faces, vendored as `.woff2`.
+- `foundations/` — five reference cards (colour, typography, shape & space,
+  motion, status glyphs). They are worked examples held to the doctrine below;
+  copy their patterns, not just their values.
 
-Not built yet: `foundations/` reference cards, the component library, page
-templates. Until they exist, **there is no worked example to copy** — you are
-composing from tokens directly, and the doctrine below is your only check. Be
-correspondingly careful with the §Do's and Don'ts list, and ask rather than invent
-when a rule and a layout pull against each other.
+Not synced yet: the component library and page templates. Until they arrive,
+compose from the tokens with the foundations as your worked examples and the
+doctrine below as your check. Be correspondingly careful with the §Do's and
+Don'ts list, and ask rather than invent when a rule and a layout pull against
+each other.
 
 ---
 
