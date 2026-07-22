@@ -19,6 +19,9 @@ worked on here.
 
 - `design-specs/` — SFI Crossings design system staging area (playbook, master
   theme, shipped artifacts). See `design-specs/DESIGN-SYSTEM-PLAYBOOK.md`.
+- `ds-components/` — the component library package the `/design-sync` pipeline
+  consumes. A wholesale mirror of the app's vendor zone (`npm run pull`);
+  never hand-edit its `src/` copies.
 - `sfi-crossings/` — the working application (Vite + React + TypeScript).
   This is where changes happen. It follows the ref arch's conventions:
   page-first structure, vendor zone in `src/components/ui/`, `@` alias,

@@ -150,6 +150,14 @@ Claude cannot launch it; the user types `/design-sync`.** Do not hand-roll a
 bundler; the pipeline owns the whole artifact set. (Verified against the v2 and
 probe archives, and the v2 `Session Findings.md` note, July 2026.)
 
+**Our sync source is `ds-components/` (repo top level)** — a local npm package
+(`sfi-crossings-ds`) mirroring the app's 46-component vendor zone wholesale via
+`npm run pull`, with a strict-tsc barrel (`src/index.ts`) as the public
+surface. The app remains the single source of truth; the package is never
+hand-edited. (The skill ships inside the CLI binary, not on disk, so its exact
+input contract gets confirmed on first run — this package matches the shape the
+probe evidenced: a real React library, components as real upstream code.)
+
 What the pipeline does, per sync:
 
 - Takes a **local npm package** (the probe used `design-system-test@1.0.0`) and
