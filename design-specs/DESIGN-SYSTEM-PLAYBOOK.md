@@ -4,8 +4,11 @@ The current working process. Nothing here is historical; if a rule is listed, it
 was verified. Extend the Components section as that work lands.
 
 **Staging area:** `design-specs/` (this repo, authoritative)
-**Live design system:** none — the temporary test projects were removed
-(July 2026); the next publish creates a fresh project and records its id here.
+**Live design system:** `757eadfb-643d-4623-b2c8-193f505a1796`
+("SFI Crossings — Design System v3"). Base set published 2026-07-22 — 19 files
+(README, tokens, fonts, foundations), readback-verified. **Not yet opened**:
+the one-time self-check has not run — sync components in before first open so
+they get indexed with everything else.
 **Evidence archives (read-only, not the live system):**
 `29637929-59b0-4b75-a1bb-3793cf6fc5ea` ("…Design System v2") — full component
 sync (21 components), `.dc.html` templates, foundations cards, and a
