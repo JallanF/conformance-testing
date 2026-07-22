@@ -86,6 +86,18 @@ One icon family (Lucide), one stroke weight, sizes from the type scale. Icons ca
 
 Status glyphs are a fixed one-to-one mapping: each of the five roles has exactly one canonical glyph, used everywhere. Outline is the default style; filled variants are reserved for `warning` and `destructive` as the colour-independent weight channel. Status icons are always paired with a text label — this is what makes "never colour alone" hold.
 
+The map — ratified 2026-07-14, canonical, and not open for reinterpretation:
+
+| Role | Lucide glyph | Filled variant |
+|---|---|---|
+| `success` | `circle-check` | — |
+| `info` | `info` | — |
+| `warning` | `triangle-alert` | filled |
+| `destructive` | `octagon-alert` | filled |
+| `stale` | `clock-alert` | — |
+
+The shapes are deliberately distinct — circle, circle, triangle, octagon, clock — so shape alone separates the rungs even in greyscale.
+
 Icon-only controls are allowed where space demands (compact and mobile bars); every one carries an accessible name, and targets hold the 24px floor.
 
 ## Motion

@@ -119,31 +119,8 @@ when a rule and a layout pull against each other.
 
 ---
 
-## The status glyph mapping
-
-The doctrine below requires the role→glyph map to be **fixed and one-to-one**, but
-does not name the glyphs. They are named here — ratified 2026-07-14, canonical, and
-not open for reinterpretation:
-
-| Role | Lucide glyph | Filled variant |
-|---|---|---|
-| `success` | `circle-check` | — |
-| `info` | `info` | — |
-| `warning` | `triangle-alert` | ✅ |
-| `destructive` | `octagon-alert` | ✅ |
-| `stale` | `clock-alert` | — |
-
-Outline is the default. **Filled is reserved for `warning` and `destructive`** — it
-is the colour-independent weight channel, and it is what lets the two most urgent
-rungs read without hue. The shapes are deliberately distinct (circle / circle /
-triangle / octagon / clock), so **shape alone separates the rungs** even in
-greyscale.
-
-A status glyph is **always** paired with its text label.
-
----
-
-*Everything below this line is the design authority document, verbatim.*
+*Everything below this line is the design authority document, verbatim. It
+includes the ratified status glyph map (§Iconography).*
 
 # SFI Crossings — Design System
 
@@ -232,6 +209,18 @@ Actions are pill-shaped — the signature control silhouette — and chips and b
 One icon family (Lucide), one stroke weight, sizes from the type scale. Icons carry meaning or are omitted — no decorative icons; the product's expressive moments belong to empty states and heroes (Components), not to glyphs.
 
 Status glyphs are a fixed one-to-one mapping: each of the five roles has exactly one canonical glyph, used everywhere. Outline is the default style; filled variants are reserved for `warning` and `destructive` as the colour-independent weight channel. Status icons are always paired with a text label — this is what makes "never colour alone" hold.
+
+The map — ratified 2026-07-14, canonical, and not open for reinterpretation:
+
+| Role | Lucide glyph | Filled variant |
+|---|---|---|
+| `success` | `circle-check` | — |
+| `info` | `info` | — |
+| `warning` | `triangle-alert` | filled |
+| `destructive` | `octagon-alert` | filled |
+| `stale` | `clock-alert` | — |
+
+The shapes are deliberately distinct — circle, circle, triangle, octagon, clock — so shape alone separates the rungs even in greyscale.
 
 Icon-only controls are allowed where space demands (compact and mobile bars); every one carries an accessible name, and targets hold the 24px floor.
 
