@@ -190,7 +190,7 @@ The emphasis budget: one `primary` action per view, counting calls-to-action. Se
 
 Amber is punctuation, never wallpaper: it appears as the one `primary` action, the focus `ring`, text selection (`selection-bg`), and the quiet `accent` hover wash — never as a large surface tint, a border colour, or decoration.
 
-Soft status washes are derived at point of use from the role colour and `background`; status tints are never minted as new values.
+Soft status washes are derived at point of use from the role colour and the surface the wash sits on — `card` on a panel, `background` on the canvas, `popover` in a floating layer. Never mix with `background` from atop another surface: in dark mode the wash lands darker than its panel and reads as a hole. Status tints are never minted as new values.
 
 This UI is SFI-only: no white-label or multi-tenant brand will ever wear it, and no brand colour beyond the amber exists.
 

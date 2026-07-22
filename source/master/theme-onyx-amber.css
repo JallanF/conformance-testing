@@ -50,13 +50,17 @@
       Radius base 10px with the contract's MULTIPLICATIVE scale
       (R5, shadcn-current) — first master on the new derivation;
       evidence radii 16/24/pill kept as onyx-* extras.
-   D8 (2026-07-20) Soft status washes are NOT minted here. A wash
-      is derived at point of use by mixing the role colour into
-      --background — color-mix(in oklab, var(--warning) N%,
-      var(--background)) — so it tracks the mode automatically
-      and no new colour value enters the system. This master
-      holds exactly one value per status role plus its
-      foreground; a tinted-surface token is a defect, not a gap.
+   D8 (2026-07-20; formula corrected 2026-07-22) Soft status
+      washes are NOT minted here. A wash is derived at point of
+      use by mixing the role colour into the surface it sits on —
+      color-mix(in oklab, var(--warning) N%, var(--card)) on a
+      panel; var(--background) only directly on the canvas — so
+      it tracks the mode automatically and no new colour value
+      enters the system. Mixing into --background from atop a
+      panel lands darker than the panel (dark mode) and reads as
+      a hole. This master holds exactly one value per status role
+      plus its foreground; a tinted-surface token is a defect,
+      not a gap.
       (States the rule DESIGN.md §Colors attributes here.)
    ============================================================ */
 @import "tailwindcss";
