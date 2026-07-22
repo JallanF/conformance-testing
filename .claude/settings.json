@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(freight-ref-arch-v11/**)",
+      "Write(freight-ref-arch-v11/**)",
+      "NotebookEdit(freight-ref-arch-v11/**)"
+    ]
+  }
+}
