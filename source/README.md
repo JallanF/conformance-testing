@@ -167,7 +167,7 @@ The look is deliberate: a near-black canvas where panels lift by tone, not shado
 
 ## Application Shell
 
-One frame serves every audience — customer, staff, and developer areas share the same shell, never visibly different frames. Its parts are fixed vocabulary; screens never rearrange them.
+One frame serves every audience — customer, staff, and developer areas share the same shell, never visibly different frames. Its parts are fixed vocabulary; screens never rearrange them. The vocabulary fixes **position, not presence**: a part whose feature is not yet built (the bell, before the notification centre exists) is omitted entirely — never moved, never substituted, never stubbed as dead chrome. What exists sits where this section says it sits.
 
 - **Top bar** — the single persistent element. Logo at the leading edge (the identity moment), level-1 navigation — flat, always-visible links, one per area (Shipments, Invoices, …); never menus, never a second row — the notification bell, and the account menu (account, settings, help) at the trailing edge. It sits on `background` behind a hairline `border`; nothing else in the frame persists. There is no sidebar in this shell; the `sidebar-*` tokens exist for component compatibility only and are unsanctioned in v1.
 - **View header** — every view opens with its title and the view's one `primary` action, right-aligned. It scrolls with the content; it is the only home for a view-level call-to-action. A record view whose content splits into facets (a shipment's info, documents, tracking) carries a tab row beneath the header — level-2 navigation: each tab is its own URL, the router owns which tab is active, and the shell and header do not re-mount on a switch.
