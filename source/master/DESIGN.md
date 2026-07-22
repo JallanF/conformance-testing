@@ -22,9 +22,9 @@ The look is deliberate: a near-black canvas where panels lift by tone, not shado
 
 One frame serves every audience — customer, staff, and developer areas share the same shell, never visibly different frames. Its parts are fixed vocabulary; screens never rearrange them.
 
-- **Top bar** — the single persistent element. Logo at the leading edge (the identity moment), two-tier navigation (areas open into sub-views: Shipments → All shipments, Track…), the notification bell, and the account menu (account, settings, help) at the trailing edge. It sits on `background` behind a hairline `border`; nothing else in the frame persists.
-- **View header** — every view opens with its title and the view's one `primary` action, right-aligned. It scrolls with the content; it is the only home for a view-level call-to-action.
-- **Content area** — a staged column of panels on `background`; panels are `card` surfaces behind hairline borders. Navigation never exceeds the two tiers.
+- **Top bar** — the single persistent element. Logo at the leading edge (the identity moment), level-1 navigation — flat, always-visible links, one per area (Shipments, Invoices, …); never menus, never a second row — the notification bell, and the account menu (account, settings, help) at the trailing edge. It sits on `background` behind a hairline `border`; nothing else in the frame persists.
+- **View header** — every view opens with its title and the view's one `primary` action, right-aligned. It scrolls with the content; it is the only home for a view-level call-to-action. A record view whose content splits into facets (a shipment's info, documents, tracking) carries a tab row beneath the header — level-2 navigation: each tab is its own URL, the router owns which tab is active, and the shell and header do not re-mount on a switch.
+- **Content area** — a staged column of panels on `background`; panels are `card` surfaces behind hairline borders. Navigation never exceeds these two levels — area links in the top bar, tabs within a view; there is no third level, and tabs never nest.
 
 ## Colors
 
