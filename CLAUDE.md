@@ -17,8 +17,8 @@ worked on here.
 
 ## Layout
 
-- `source/` — SFI Crossings design system source (playbook, master theme,
-  shipped artifacts). See `source/DESIGN-SYSTEM-PLAYBOOK.md`.
+- `design-specs/` — SFI Crossings design system staging area (playbook, master
+  theme, shipped artifacts). See `design-specs/DESIGN-SYSTEM-PLAYBOOK.md`.
 - `sfi-crossings/` — the working application (Vite + React + TypeScript).
   This is where changes happen. It follows the ref arch's conventions:
   page-first structure, vendor zone in `src/components/ui/`, `@` alias,
