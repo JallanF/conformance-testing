@@ -17,6 +17,9 @@ worked on here.
 
 ## Layout
 
+- `architecture/` — the cc26 (principles) and cc27 (implementation decisions)
+  architecture documents that `freight-ref-arch-v11/` cites throughout. cc27
+  v11 is authoritative where versions differ.
 - `design-specs/` — SFI Crossings design system staging area (playbook, master
   theme, shipped artifacts). See `design-specs/DESIGN-SYSTEM-PLAYBOOK.md`.
 - `ds-components/` — the component library package the `/design-sync` pipeline
