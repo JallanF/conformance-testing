@@ -38,6 +38,10 @@ export * from './components/ui/sheet';
 export * from './components/ui/sidebar';
 export * from './components/ui/skeleton';
 export * from './components/ui/sonner';
+// The imperative toast handle must come from the SAME sonner instance the
+// bundled <Toaster /> subscribes to — consumers (and previews) import it from
+// this package, never from 'sonner' directly.
+export { toast } from 'sonner';
 export * from './components/ui/spinner';
 export * from './components/ui/switch';
 export * from './components/ui/table';
@@ -48,3 +52,4 @@ export * from './components/ui/toggle-group';
 export * from './components/ui/tooltip';
 export * from './hooks/use-mobile';
 export * from './lib/utils';
+export * from './ds-provider';

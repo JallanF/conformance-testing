@@ -22,4 +22,13 @@ for (const path of mirrored) {
   rmSync(join(src, path), { recursive: true, force: true });
   cpSync(join(app, path), join(src, path), { recursive: true });
 }
-console.log(`Pulled ${mirrored.length} paths from sfi-crossings/src.`);
+
+// The design authority is mirrored in as a guidelines doc so the /design-sync
+// pipeline ships it to the Claude Design agent (default guidelinesGlob picks
+// up docs/guides/**/*.md). Source of truth: design-specs/master/DESIGN.md.
+const authority = join(here, '..', '..', 'design-specs', 'master', 'DESIGN.md');
+const guide = join(here, '..', 'docs', 'guides', 'design-authority.md');
+rmSync(guide, { force: true });
+cpSync(authority, guide);
+
+console.log(`Pulled ${mirrored.length} paths from sfi-crossings/src + design authority.`);

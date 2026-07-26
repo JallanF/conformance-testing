@@ -18,7 +18,10 @@ npm run pull
 
 Owned by this package (not mirrored): `package.json`, `tsconfig.json`,
 `scripts/pull.mjs`, `src/index.ts` (the barrel — regenerate its list when the
-vendor inventory changes), and this README.
+vendor inventory changes), `src/ds-provider.tsx` (the dark-canonical preview
+wrapper), the `.design-sync/` durable files (config, NOTES, conventions,
+previews), and this README. `docs/guides/design-authority.md` is mirrored from
+`design-specs/master/DESIGN.md` by the pull script.
 
 ## Verify
 
